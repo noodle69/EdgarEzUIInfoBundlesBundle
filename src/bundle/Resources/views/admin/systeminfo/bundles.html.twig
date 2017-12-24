@@ -1,0 +1,30 @@
+{% trans_default_domain "edgarezuiinfobundles" %}
+
+<div class="ez-table-header">
+    <div class="ez-table-header__headline">{{ 'bundles.header'|trans({'%count%': info.bundles|length})|desc('Community bundles (%count%)') }}</div>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        {% if info.bundles is empty %}
+            {{ 'bundles.bundles.empty'|trans|desc('No community bundles registered.') }}
+        {% else %}
+            <th>{{ 'bundles.name'|trans|desc('Name') }}</th>
+            <th>{{ 'bundles.repository'|trans|desc('Repository') }}</th>
+            <th>{{ 'bundles.description'|trans|desc('Description') }}</th>
+            <th>{{ 'bundles.last_modified'|trans|desc('Last modification') }}</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for bundle in info.bundles %}
+        <tr>
+            <td>{{ bundle.vendor }}/{{ bundle.name }}</td>
+            <td><a href="{{ bundle.repository }}" target="_blank">{{ 'bundles.link'|trans|desc('Link') }}</a></td>
+            <td>{{ bundle.description }}</td>
+            <td>{{ bundle.lastModified|date('Y-m-d') }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+

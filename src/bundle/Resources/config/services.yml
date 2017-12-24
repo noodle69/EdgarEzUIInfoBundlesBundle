@@ -1,0 +1,26 @@
+imports:
+
+parameters:
+    edgarez.uiinfobundles.packagist.api.list: "https://packagist.org/packages/list.json?type=<type>"
+    edgarez.uiinfobundles.packagist.api.package: "https://packagist.org/p/<vendor>/<name>.json"
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Edgar\EzUIInfoBundles\API\PackagistAPI:
+        public: true
+        arguments:
+            $listPackageUrl: "%edgarez.uiinfobundles.packagist.api.list%"
+            $packageInfoUrl: "%edgarez.uiinfobundles.packagist.api.package%"
+
+    Edgar\EzUIInfoBundles\SystemInfo\Collector\BundlesSystemInfoCollector:
+        lazy: true
+        tags:
+            - { name: "support_tools.system_info.collector", identifier: "bundles" }
+
+    Edgar\EzUIInfoBundlesBundle\Cron\BundlesCron:
+        tags:
+          - { name: "edgar.cron", arguments: "type:ezplatform-bundle", alias: bundles, priority: 100, expression: "0 * * * *" }
