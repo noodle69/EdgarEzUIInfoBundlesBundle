@@ -4,7 +4,9 @@ namespace Edgar\EzUIInfoBundles\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
+use Edgar\EzUIBookmarkBundle\Entity\EdgarEzBookmark;
 use Edgar\EzUIInfoBundles\API\PackagistAPI;
+use Edgar\EzUIInfoBundlesBundle\EdgarEzUIInfoBundlesBundle;
 use Edgar\EzUIInfoBundlesBundle\Entity\EdgarEzPackage;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -32,6 +34,18 @@ class EdgarEzPackageRepository extends EntityRepository
                 }
             }
         }
+    }
+
+    public function getPackages()
+    {
+        $entityManager = $this->getEntityManager();
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('p')
+            ->from(EdgarEzPackage::class, 'p')
+            ->orderBy('p.lastModified', 'DESC');
+
+        return $queryBuilder;
     }
 
     protected function listPackages(string $type, PackagistAPI $packagistAPI): array

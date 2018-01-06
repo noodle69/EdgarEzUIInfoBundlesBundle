@@ -8,38 +8,38 @@
     <body>
       <trans-unit id="9b1d2403b327957a4db60489f8d5389dfb95046d" resname="bundles.bundles.empty">
         <source>No community bundles registered.</source>
-        <target state="new">No community bundles registered.</target>
+        <target>No community bundles registered.</target>
         <note>key: bundles.bundles.empty</note>
       </trans-unit>
       <trans-unit id="613be2afc21e5f57c093094888c67a2e042268e8" resname="bundles.description">
         <source>Description</source>
-        <target state="new">Description</target>
+        <target>Description</target>
         <note>key: bundles.description</note>
       </trans-unit>
       <trans-unit id="7b1518d7f846b77b8844bf93cb11ee78b4204bfe" resname="bundles.header">
         <source>Community bundles (%count%)</source>
-        <target state="new">Community bundles (%count%)</target>
+        <target>Community bundles (%count%)</target>
         <note>key: bundles.header</note>
       </trans-unit>
       <trans-unit id="b4be2a7ad045ca887d79b6525a9be216e1864769" resname="bundles.last_modified">
         <source>Last modification</source>
-        <target state="new">Last modification</target>
+        <target>Last modification</target>
         <note>key: bundles.last_modified</note>
-      </trans-unit>
-      <trans-unit id="f21192763dd472f05bab497cd1a221aca029798f" resname="bundles.link">
-        <source>Link</source>
-        <target state="new">Link</target>
-        <note>key: bundles.link</note>
       </trans-unit>
       <trans-unit id="f14686804a88ad371553681b9bbb8e5529f76382" resname="bundles.name">
         <source>Name</source>
-        <target state="new">Name</target>
+        <target>Name</target>
         <note>key: bundles.name</note>
       </trans-unit>
       <trans-unit id="81655f0423ca7b07db8745a13ef7cb3f5dde435e" resname="bundles.repository">
         <source>Repository</source>
-        <target state="new">Repository</target>
+        <target>Repository</target>
         <note>key: bundles.repository</note>
+      </trans-unit>
+      <trans-unit id="fe647ff0e12d67501403559464217be468dba3d8" resname="search.viewing">
+        <source>Viewing %viewing% out of %total% sub-items</source>
+        <target state="new">Viewing %viewing% out of %total% sub-items</target>
+        <note>key: search.viewing</note>
       </trans-unit>
     </body>
   </file>

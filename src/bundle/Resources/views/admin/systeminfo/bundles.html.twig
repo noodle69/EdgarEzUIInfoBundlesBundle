@@ -1,7 +1,7 @@
 {% trans_default_domain "edgarezuiinfobundles" %}
 
 <div class="ez-table-header">
-    <div class="ez-table-header__headline">{{ 'bundles.header'|trans({'%count%': info.bundles|length})|desc('Community bundles (%count%)') }}</div>
+    <div class="ez-table-header__headline">{{ 'bundles.header'|trans({'%count%': info.pager.nbResults})|desc('Community bundles (%count%)') }}</div>
 </div>
 <table class="table">
     <thead>
@@ -18,13 +18,16 @@
     </thead>
     <tbody>
     {% for bundle in info.bundles %}
-        <tr>
-            <td>{{ bundle.vendor }}/{{ bundle.name }}</td>
-            <td><a href="{{ bundle.repository }}" target="_blank">{{ 'bundles.link'|trans|desc('Link') }}</a></td>
-            <td>{{ bundle.description }}</td>
-            <td>{{ bundle.lastModified|date('Y-m-d') }}</td>
-        </tr>
+        {% include '@EdgarEzUIInfoBundles/admin/systeminfo/bundles/table_row.html.twig' with { bundle: bundle } %}
     {% endfor %}
     </tbody>
 </table>
+<div class="row justify-content-center align-items-center">
+    <h6>{{ 'search.viewing'|trans({'%viewing%': info.pager.currentPageResults|length, '%total%': info.pager.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
+</div>
+{% if info.pager.haveToPaginate %}
+    <div class="row justify-content-center align-items-center">
+        {{ pagerfanta(info.pager, 'ez', {'routeName': 'ezplatform.systeminfo'}) }}
+    </div>
+{% endif %}
 
