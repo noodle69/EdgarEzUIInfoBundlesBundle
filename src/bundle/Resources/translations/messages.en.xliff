@@ -16,10 +16,10 @@
         <target state="new">Vendors</target>
         <note>key: Vendors</note>
       </trans-unit>
-      <trans-unit id="18cbde25712ae77e32f04fd4979a6b80e6cd69e8" resname="breadcrumb.audit">
-        <source>Audit</source>
-        <target state="new">Audit</target>
-        <note>key: breadcrumb.audit</note>
+      <trans-unit id="d21d07085caa55b0fee2fc054a6878bbdb24ae78" resname="breadcrumb.admin">
+        <source>Admin</source>
+        <target state="new">Admin</target>
+        <note>key: breadcrumb.admin</note>
       </trans-unit>
       <trans-unit id="09d97293e0921ea042b6db104f5e44c8b82919eb" resname="main__infobundles">
         <source>Community bundles</source>
