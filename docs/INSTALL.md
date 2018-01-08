@@ -44,3 +44,14 @@ doctrine:
 ```
 php bin/console doctrine:schema:update --force
 ```
+
+## Add routing
+
+Add to your global configuration app/config/routing.yml
+
+```yaml
+edgar.ezuiinfobundles:
+    resource: '@EdgarEzUIInfoBundlesBundle/Resources/config/routing.yml'
+    defaults:
+        siteaccess_group_whitelist: 'admin_group'    
+```

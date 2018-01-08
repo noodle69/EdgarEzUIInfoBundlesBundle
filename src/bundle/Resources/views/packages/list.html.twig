@@ -1,0 +1,82 @@
+{% extends 'EzPlatformAdminUiBundle::layout.html.twig' %}
+
+{% form_theme form_package '@EzPlatformAdminUi/form_fields.html.twig'  %}
+
+{% trans_default_domain 'edgarezuiinfobundles' %}
+
+{% block body_class %}ez-info-view{% endblock %}
+
+{% block breadcrumbs %}
+    {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
+        { value: 'breadcrumb.audit'|trans(domain='messages')|desc('Audit') , },
+        { url: path('edgar.audit.dashboard'), value: 'dashboard.breadcrumb.view'|trans|desc('Dashboard') },
+    ]} %}
+{% endblock %}
+
+{% block page_title %}
+    {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
+        title: 'dashboard.view.title'|trans|desc('Audit dashboard'),
+        iconName: 'dashboard'
+    } %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="container mt-4">
+        {{ form_start(form_package, { 'action': path('edgar.ezuiinfobundles.list') }) }}
+
+        <div class="input-group">
+            {{ form_widget(form_package.vendor) }}
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary">
+                <svg class="ez-icon ez-icon-search-button">
+                    <use xlink:href="{{ asset('bundles/ezplatformadminui/img/ez-icons.svg') }}#search"></use>
+                </svg>
+                    {{ 'dashboard.perform'|trans|desc('Search') }}</button>
+            </span>
+        </div>
+
+        {{ form_end(form_package) }}
+
+        {% if results is defined %}
+            <div class="ez-table-header mt-3">
+                <h5>{{ 'search.header'|trans({'%total%': pager.nbResults})|desc('Search results (%total%)') }}</h5>
+            </div>
+
+            {% if results is empty %}
+                <table class="table">
+                    <tr>
+                        <td colspan="4">
+                            <span>{{ 'search.no_result'|trans|desc('Sorry, no results were found.') }}</span>
+                        </td>
+                    </tr>
+                </table>
+            {% else %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'package.package_name'|trans|desc('Package') }}</th>
+                        <th>{{ 'package.description'|trans|desc('Description') }}</th>
+                        <th>{{ 'package.last_modified'|trans|desc('Last modified') }}</th>
+                        <th>{{ 'package.status'|trans|desc('Status') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in results %}
+                        {% include '@EdgarEzUIInfoBundles/packages/table_row.html.twig' with { row: row } %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row justify-content-center align-items-center">
+                    <h6>{{ 'search.viewing'|trans({'%viewing%': pager.currentPageResults|length, '%total%': pager.nbResults})|desc('Viewing %viewing% out of %total% sub-items') }}</h6>
+                </div>
+                {% if pager.haveToPaginate %}
+                    <div class="row justify-content-center align-items-center">
+                        {{ pagerfanta(pager, 'ez') }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </section>
+
+{% endblock %}

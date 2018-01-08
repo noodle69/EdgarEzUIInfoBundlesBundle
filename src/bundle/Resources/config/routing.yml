@@ -1,0 +1,4 @@
+edgar.ezuiinfobundles.list:
+    path: /bundles/list
+    defaults:
+        _controller: 'EdgarEzUIInfoBundlesBundle:InfoBundles:list'

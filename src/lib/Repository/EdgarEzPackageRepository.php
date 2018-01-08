@@ -4,14 +4,20 @@ namespace Edgar\EzUIInfoBundles\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Edgar\EzUIBookmarkBundle\Entity\EdgarEzBookmark;
 use Edgar\EzUIInfoBundles\API\PackagistAPI;
+use Edgar\EzUIInfoBundles\Form\Data\PackageData;
 use Edgar\EzUIInfoBundlesBundle\EdgarEzUIInfoBundlesBundle;
 use Edgar\EzUIInfoBundlesBundle\Entity\EdgarEzPackage;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class EdgarEzPackageRepository extends EntityRepository
 {
+    const STATUS_OK = 1;
+    const STATUS_ABNADONED = 2;
+    const STATUS_DELETED = 3;
+
     public function recordPackages(string $type, PackagistAPI $packagistAPI, OutputInterface $output)
     {
         $packages = $this->listPackages($type, $packagistAPI);
@@ -22,9 +28,13 @@ class EdgarEzPackageRepository extends EntityRepository
             foreach ($names as $name) {
                 $package = $this->getPackageInfo($vendor, $name);
                 $edgarEzPackage = $packagistAPI->getPackageInfo($vendor, $name);
-                if (!$package || $package->getLastModified()->diff($edgarEzPackage->getLastModified())->s !== 0) {
+                if (!$package
+                    || $package->getLastModified()->diff($edgarEzPackage->getLastModified())->s !== 0
+                    || $package->getStatus() != $edgarEzPackage->getStatus()
+                ) {
                     if ($package) {
                         $package->setLastModified($edgarEzPackage->getLastModified());
+                        $package->setStatus($edgarEzPackage->getStatus());
                     } else {
                         $package = $edgarEzPackage;
                     }
@@ -32,6 +42,7 @@ class EdgarEzPackageRepository extends EntityRepository
                     $output->writeln('Register package : ' . $package->getVendor() . '/' . $package->getName());
                     $this->recordPackage($package, $output);
                 }
+
             }
         }
     }
@@ -95,5 +106,41 @@ class EdgarEzPackageRepository extends EntityRepository
         }
 
         $entityManager->flush();
+    }
+
+    public function buildQuery(PackageData $data): QueryBuilder
+    {
+        $entityManager = $this->getEntityManager();
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $queryBuilder->select('p')
+            ->from(EdgarEzPackage::class, 'p')
+            ->orderBy('p.lastModified', 'DESC');
+
+        if ($data->getVendor()) {
+            $queryBuilder
+                ->where($queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq('p.vendor', ':vendor')
+                ))
+                ->setParameter('vendor', $data->getVendor()->getIdentifier());
+        }
+
+        return $queryBuilder;
+    }
+
+    public function loadVendors(): array
+    {
+        $vendors = [];
+
+        $entityManager = $this->getEntityManager();
+
+        $queryBuilder = $entityManager->createQueryBuilder();
+        $vendorsQuery = $queryBuilder->select('p.vendor')
+            ->from(EdgarEzPackage::class, 'p')
+            ->orderBy('p.vendor', 'ASC')
+            ->distinct()
+            ->getQuery();
+
+        return $vendorsQuery->getArrayResult();
     }
 }

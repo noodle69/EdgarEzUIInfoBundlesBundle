@@ -6,10 +6,25 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="f21192763dd472f05bab497cd1a221aca029798f" resname="bundles.link">
-        <source>Link</source>
-        <target state="new">Link</target>
-        <note>key: bundles.link</note>
+      <trans-unit id="4cd2dcebbd3c72fe8f56e6f73ff45f54d9323c77" resname="Choose a vendor">
+        <source>Choose a vendor</source>
+        <target state="new">Choose a vendor</target>
+        <note>key: Choose a vendor</note>
+      </trans-unit>
+      <trans-unit id="634d89417f97940a6a7e0d167cbcaa5b7cceb57c" resname="Vendors">
+        <source>Vendors</source>
+        <target state="new">Vendors</target>
+        <note>key: Vendors</note>
+      </trans-unit>
+      <trans-unit id="18cbde25712ae77e32f04fd4979a6b80e6cd69e8" resname="breadcrumb.audit">
+        <source>Audit</source>
+        <target state="new">Audit</target>
+        <note>key: breadcrumb.audit</note>
+      </trans-unit>
+      <trans-unit id="09d97293e0921ea042b6db104f5e44c8b82919eb" resname="main__infobundles">
+        <source>Community bundles</source>
+        <target state="new">Community bundles</target>
+        <note>key: main__infobundles</note>
       </trans-unit>
     </body>
   </file>

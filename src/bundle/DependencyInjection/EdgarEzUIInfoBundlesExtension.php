@@ -19,16 +19,5 @@ class EdgarEzUIInfoBundlesExtension extends Extension
         );
 
         $loader->load('services.yml');
-        $this->prependViews($container);
-    }
-
-    private function prependViews(ContainerBuilder $container): void
-    {
-        $configFile = __DIR__ . '/../Resources/config/views.yml';
-        $config = Yaml::parse(file_get_contents($configFile));
-        $parameters = $container->getParameter('ezsettings.global.system_info_view');
-        $parameters['pjax_tab'] = array_merge($parameters['pjax_tab'], $config['global']['system_info_view']['pjax_tab']);
-        $container->setParameter('ezsettings.global.system_info_view', $parameters);
-        $container->addResource(new FileResource($configFile));
     }
 }

@@ -41,7 +41,9 @@ class BundlesCron extends AbstractCron
     {
         $output->writeln('Start Bundle registration');
         $type = $this->getArgument($input, 'type');
-        $this->packageRepository->recordPackages($type, $this->packagistAPI, $output);
-        $output->writeln('Bundle registration ended');
+        if ($type) {
+            $this->packageRepository->recordPackages($type, $this->packagistAPI, $output);
+            $output->writeln('Bundle registration ended');
+        }
     }
 }

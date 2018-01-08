@@ -2,6 +2,7 @@
 
 namespace Edgar\EzUIInfoBundles\API;
 
+use Edgar\EzUIInfoBundles\Repository\EdgarEzPackageRepository;
 use Edgar\EzUIInfoBundlesBundle\Entity\EdgarEzPackage;
 use GuzzleHttp\Client;
 
@@ -53,13 +54,21 @@ class PackagistAPI
 
         $packageInfo = $packageInfo['packages'][$vendor . '/' . $name]['dev-master'];
 
+        $status = EdgarEzPackageRepository::STATUS_OK;
+        if (isset($packageInfo['abandoned'])) {
+            $status = EdgarEzPackageRepository::STATUS_ABNADONED;
+        } else if (isset($packageInfo['deleted'])) {
+            $status = EdgarEzPackageRepository::STATUS_DELETED;
+        }
+
+
         $result = new EdgarEzPackage();
         $result->setVendor($vendor);
         $result->setName($name);
         $result->setRepository($packageInfo['source']['url']);
         $result->setDescription($packageInfo['description']);
         $result->setLastModified(new \DateTime($packageInfo['time']));
-        $result->setStatus(1);
+        $result->setStatus($status);
 
         return $result;
     }

@@ -1,7 +1,0 @@
-global:
-    system_info_view:
-        pjax_tab:
-            bundles:
-                template: 'EdgarEzUIInfoBundlesBundle:admin/systeminfo:bundles.html.twig'
-                match:
-                    SystemInfo\Identifier: 'bundles'
