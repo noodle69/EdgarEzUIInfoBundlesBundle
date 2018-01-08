@@ -8,15 +8,15 @@
 
 {% block breadcrumbs %}
     {% include '@EzPlatformAdminUi/parts/breadcrumbs.html.twig' with { items: [
-        { value: 'breadcrumb.audit'|trans(domain='messages')|desc('Audit') , },
-        { url: path('edgar.audit.dashboard'), value: 'dashboard.breadcrumb.view'|trans|desc('Dashboard') },
+        { value: 'breadcrumb.admin'|trans(domain='messages')|desc('Admin') },
+        { url: path('edgar.ezuiinfobundles.list'), value: 'infobundles.breadcrumb.view'|trans|desc('Community bundles') },
     ]} %}
 {% endblock %}
 
 {% block page_title %}
     {% include '@EzPlatformAdminUi/parts/page_title.html.twig' with {
-        title: 'dashboard.view.title'|trans|desc('Audit dashboard'),
-        iconName: 'dashboard'
+        title: 'uiinfobundles.view.title'|trans|desc('Community bundles'),
+        iconName: 'archive-restore'
     } %}
 {% endblock %}
 
