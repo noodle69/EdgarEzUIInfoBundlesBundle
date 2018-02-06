@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VendorChoiceType extends AbstractType
 {
-    /** @var PackageService  */
+    /** @var PackageService */
     protected $packageService;
 
     public function __construct(PackageService $packageService)
@@ -29,6 +29,7 @@ class VendorChoiceType extends AbstractType
             ->setDefaults([
                 'choice_loader' => new CallbackChoiceLoader(function () {
                     $vendors = $this->packageService->loadVendors();
+
                     return $vendors;
                 }),
                 'choice_label' => 'name',

@@ -11,12 +11,14 @@ class VendorData
     public function setIdentifier(string $identifier): self
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 

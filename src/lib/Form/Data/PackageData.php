@@ -34,28 +34,31 @@ class PackageData
     /**
      * @param int $limit
      *
-     * @return FilterAuditData
+     * @return PackageData
      */
     public function setLimit(int $limit): self
     {
         $this->limit = $limit;
+
         return $this;
     }
 
     /**
      * @param int $page
      *
-     * @return FilterAuditData
+     * @return PackageData
      */
     public function setPage(int $page): self
     {
         $this->page = $page;
+
         return $this;
     }
 
     public function setVendor(?VendorData $vendor): self
     {
         $this->vendor = $vendor;
+
         return $this;
     }
 

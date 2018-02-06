@@ -12,7 +12,7 @@ class ConfigureMenuListener implements TranslationContainerInterface
 {
     const ITEM_INFOBUNDLES = 'main__infobundles';
 
-    /** @var PermissionResolver  */
+    /** @var PermissionResolver */
     private $permissionResolver;
 
     public function __construct(PermissionResolver $permissionResolver)

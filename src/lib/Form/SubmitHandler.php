@@ -53,6 +53,7 @@ class SubmitHandler
                 $this->notificationHandler->warning($formError->getMessage());
             }
         }
+
         return null;
     }
 }

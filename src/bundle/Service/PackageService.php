@@ -11,7 +11,7 @@ use Edgar\EzUIInfoBundlesBundle\Entity\EdgarEzPackage;
 
 class PackageService
 {
-    /** @var EdgarEzPackageRepository  */
+    /** @var EdgarEzPackageRepository */
     private $package;
 
     public function __construct(

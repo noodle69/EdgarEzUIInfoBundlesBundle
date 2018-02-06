@@ -8,7 +8,7 @@ use Symfony\Component\Translation\Translator;
 
 class PagerContentToPackageMapper
 {
-    /** @var Translator  */
+    /** @var Translator */
     private $translator;
 
     public function __construct(Translator $translator)

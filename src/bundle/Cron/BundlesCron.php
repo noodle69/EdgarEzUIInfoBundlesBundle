@@ -3,6 +3,7 @@
 namespace Edgar\EzUIInfoBundlesBundle\Cron;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\ORMException;
 use Edgar\Cron\Cron\AbstractCron;
 use Edgar\EzUIInfoBundles\API\PackagistAPI;
 use Edgar\EzUIInfoBundles\Repository\EdgarEzPackageRepository;
@@ -16,7 +17,7 @@ class BundlesCron extends AbstractCron
     /** @var EdgarEzPackageRepository */
     private $packageRepository;
 
-    /** @var PackagistAPI  */
+    /** @var PackagistAPI */
     private $packagistAPI;
 
     public function __construct(
@@ -42,7 +43,12 @@ class BundlesCron extends AbstractCron
         $output->writeln('Start Bundle registration');
         $type = $this->getArgument($input, 'type');
         if ($type) {
-            $this->packageRepository->recordPackages($type, $this->packagistAPI, $output);
+            try {
+                $this->packageRepository->recordPackages($type, $this->packagistAPI, $output);
+            } catch (ORMException $e) {
+                $output->writeln('Fail to register packages: ' . $e->getMessage());
+            }
+
             $output->writeln('Bundle registration ended');
         }
     }

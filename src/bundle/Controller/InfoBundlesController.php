@@ -3,7 +3,6 @@
 namespace Edgar\EzUIInfoBundlesBundle\Controller;
 
 use Edgar\EzUIInfoBundles\Form\Data\PackageData;
-use Edgar\EzUIInfoBundles\Form\Data\VendorData;
 use Edgar\EzUIInfoBundles\Form\Factory\FormFactory;
 use Edgar\EzUIInfoBundles\Form\Mapper\PagerContentToPackageMapper;
 use Edgar\EzUIInfoBundles\Form\SubmitHandler;
@@ -23,10 +22,10 @@ class InfoBundlesController extends Controller
     /** @var PackageService */
     protected $packageService;
 
-    /** @var FormFactory  */
+    /** @var FormFactory */
     protected $formFactory;
 
-    /** @var SubmitHandler  */
+    /** @var SubmitHandler */
     protected $submitHandler;
 
     /** @var NotificationHandlerInterface $notificationHandler */
@@ -35,10 +34,10 @@ class InfoBundlesController extends Controller
     /** @var TranslatorInterface */
     private $translator;
 
-    /** @var PermissionResolver  */
+    /** @var PermissionResolver */
     private $permissionResolver;
 
-    /** @var PagerContentToPackageMapper  */
+    /** @var PagerContentToPackageMapper */
     private $pagerContentToPackageMapper;
 
     public function __construct(
@@ -101,6 +100,7 @@ class InfoBundlesController extends Controller
                     'edgarezuicron'
                 )
             );
+
             return new RedirectResponse($this->generateUrl('ezplatform.dashboard', []));
         }
 

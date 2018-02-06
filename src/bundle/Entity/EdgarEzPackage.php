@@ -5,7 +5,7 @@ namespace Edgar\EzUIInfoBundlesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EdgarEzPackage
+ * EdgarEzPackage.
  *
  * @ORM\Entity(repositoryClass="Edgar\EzUIInfoBundles\Repository\EdgarEzPackageRepository")
  * @ORM\Table(name="edgar_ez_package")
@@ -106,61 +106,73 @@ class EdgarEzPackage
 
     /**
      * @param string $vendor
+     *
      * @return EdgarEzPackage
      */
     public function setVendor(string $vendor): self
     {
         $this->vendor = $vendor;
+
         return $this;
     }
 
     /**
      * @param string $name
+     *
      * @return EdgarEzPackage
      */
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
      * @param \DateTime $lastModified
+     *
      * @return EdgarEzPackage
      */
     public function setLastModified(\DateTime $lastModified): self
     {
         $this->lastModified = $lastModified;
+
         return $this;
     }
 
     /**
      * @param string $repository
+     *
      * @return EdgarEzPackage
      */
     public function setRepository(string $repository): self
     {
         $this->repository = $repository;
+
         return $this;
     }
 
     /**
      * @param null|string $description
+     *
      * @return EdgarEzPackage
      */
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
      * @param int $status
+     *
      * @return EdgarEzPackage
      */
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 }

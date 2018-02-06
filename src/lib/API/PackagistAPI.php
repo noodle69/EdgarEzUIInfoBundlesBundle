@@ -8,10 +8,10 @@ use GuzzleHttp\Client;
 
 class PackagistAPI
 {
-    /** @var string  */
+    /** @var string */
     private $listPackageUrl;
 
-    /** @var string  */
+    /** @var string */
     private $packageInfoUrl;
 
     public function __construct(
@@ -57,10 +57,9 @@ class PackagistAPI
         $status = EdgarEzPackageRepository::STATUS_OK;
         if (isset($packageInfo['abandoned'])) {
             $status = EdgarEzPackageRepository::STATUS_ABNADONED;
-        } else if (isset($packageInfo['deleted'])) {
+        } elseif (isset($packageInfo['deleted'])) {
             $status = EdgarEzPackageRepository::STATUS_DELETED;
         }
-
 
         $result = new EdgarEzPackage();
         $result->setVendor($vendor);

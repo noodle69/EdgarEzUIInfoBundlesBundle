@@ -5,10 +5,8 @@ namespace Edgar\EzUIInfoBundles\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
-use Edgar\EzUIBookmarkBundle\Entity\EdgarEzBookmark;
 use Edgar\EzUIInfoBundles\API\PackagistAPI;
 use Edgar\EzUIInfoBundles\Form\Data\PackageData;
-use Edgar\EzUIInfoBundlesBundle\EdgarEzUIInfoBundlesBundle;
 use Edgar\EzUIInfoBundlesBundle\Entity\EdgarEzPackage;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -18,6 +16,14 @@ class EdgarEzPackageRepository extends EntityRepository
     const STATUS_ABNADONED = 2;
     const STATUS_DELETED = 3;
 
+    /**
+     * @param string $type
+     * @param PackagistAPI $packagistAPI
+     * @param OutputInterface $output
+     *
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function recordPackages(string $type, PackagistAPI $packagistAPI, OutputInterface $output)
     {
         $packages = $this->listPackages($type, $packagistAPI);
@@ -42,7 +48,6 @@ class EdgarEzPackageRepository extends EntityRepository
                     $output->writeln('Register package : ' . $package->getVendor() . '/' . $package->getName());
                     $this->recordPackage($package, $output);
                 }
-
             }
         }
     }
@@ -88,9 +93,15 @@ class EdgarEzPackageRepository extends EntityRepository
         } catch (ORMException $e) {
             $output->writeln('Failed to register package : ' . $package->getVendor() . '/' . $package->getName());
         }
-
     }
 
+    /**
+     * @param array $packages
+     * @param OutputInterface $output
+     *
+     * @throws ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     protected function purgePackages(array $packages, OutputInterface $output)
     {
         $entityManager = $this->getEntityManager();
@@ -130,8 +141,6 @@ class EdgarEzPackageRepository extends EntityRepository
 
     public function loadVendors(): array
     {
-        $vendors = [];
-
         $entityManager = $this->getEntityManager();
 
         $queryBuilder = $entityManager->createQueryBuilder();
