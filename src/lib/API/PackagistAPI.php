@@ -52,7 +52,13 @@ class PackagistAPI
             return null;
         }
 
-        $packageInfo = $packageInfo['packages'][$vendor . '/' . $name]['dev-master'];
+        if (!isset($packageInfo['packages'][$vendor . '/' . $name]['dev-master'])) {
+            $keys = array_keys($packageInfo['packages'][$vendor . '/' . $name]);
+            $key = $keys[count($keys) - 1];
+            $packageInfo = $packageInfo['packages'][$vendor . '/' . $name][$key];
+        } else {
+            $packageInfo = $packageInfo['packages'][$vendor . '/' . $name]['dev-master'];
+        }
 
         $status = EdgarEzPackageRepository::STATUS_OK;
         if (isset($packageInfo['abandoned'])) {
