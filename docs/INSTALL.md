@@ -50,8 +50,15 @@ php bin/console doctrine:schema:update --force
 Add to your global configuration app/config/routing.yml
 
 ```yaml
+edgar.ezuicron:
+    resource: '@EdgarEzUICronBundle/Resources/config/routing.yml'
+    prefix: /_uicron
+    defaults:
+        siteaccess_group_whitelist: 'admin_group'
+        
 edgar.ezuiinfobundles:
     resource: '@EdgarEzUIInfoBundlesBundle/Resources/config/routing.yml'
+    prefix: /_infobundles
     defaults:
         siteaccess_group_whitelist: 'admin_group'    
 ```
