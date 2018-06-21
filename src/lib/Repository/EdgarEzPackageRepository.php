@@ -64,6 +64,11 @@ class EdgarEzPackageRepository extends EntityRepository
         return $queryBuilder;
     }
 
+    /**
+     * @param string       $type
+     * @param PackagistAPI $packagistAPI
+     * @return array
+     */
     protected function listPackages(string $type, PackagistAPI $packagistAPI): array
     {
         $packages = $packagistAPI->listByType($type);
