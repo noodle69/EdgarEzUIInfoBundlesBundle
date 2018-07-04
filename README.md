@@ -13,3 +13,5 @@ This bundle offers an ezplatform Interface listing all eZ Platform community bun
 ## Documentation
 
 [Installation](docs/INSTALL.md)
+
+[Usage](docs/USAGE.md)
