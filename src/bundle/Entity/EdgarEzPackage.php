@@ -15,7 +15,7 @@ class EdgarEzPackage
     /**
      * @var string
      *
-     * @ORM\Column(name="vendor", type="string", length=255, nullable=false)
+     * @ORM\Column(name="vendor", type="string", length=191, nullable=false)
      * @ORM\Id
      */
     private $vendor;
@@ -23,7 +23,7 @@ class EdgarEzPackage
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=191, nullable=false)
      * @ORM\Id
      */
     private $name;
